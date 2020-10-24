@@ -1,12 +1,12 @@
 import React from "react";
 import classes from "./Header.module.scss";
-import { Switch } from "antd";
 import Search from "./Search/Search";
+import UpdateButton from "./UpdateButton/UpdateButton";
 
 const Header = () => {
   return (
     <div className={classes.Header}>
-      <Switch checkedChildren="°C" unCheckedChildren="°F" defaultChecked />
+      <UpdateButton />
       <Search />
     </div>
   );
