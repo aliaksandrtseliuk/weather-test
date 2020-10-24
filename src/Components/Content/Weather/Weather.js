@@ -5,9 +5,13 @@ import { connect } from "react-redux";
 import {
   SET_CURRENT_WEATHER_INFO,
   SET_CURRENT_TIME,
+  SET_CITY_NAME,
+  SET_IMAGE_URL,
 } from "../../../Actions/actionTypes";
 import { COUNTRIES as countries } from "../../../Helpers/countries";
 import { days, months } from "../../../Helpers/calendar";
+import { getImageUrl } from "../../../Helpers/getImageUrl";
+import { getInfo } from "../../../Helpers/getInfo";
 
 import Forecast from "./Forecast/Forecast";
 
@@ -19,21 +23,9 @@ const Weather = (props) => {
     currentWeatherInfo,
     setCurrentWeatherInfo,
     setCurrentTime,
+    setCityName,
+    setImageUrl,
   } = props;
-  const KEY = "6e3c74debd9bb52776febdf82d6af4d2";
-  const MAIN_PATH = "https://api.unsplash.com/photos/random/";
-  const ACCESS_KEY =
-    "&client_id=652e1531e0191753dccb73757017b1ef2793f9e582b840542ded8e0e85c766a5";
-
-  const getImageUrl = async (city) => {
-    const query = `?query=town,${city}`;
-    const url = MAIN_PATH + query + ACCESS_KEY;
-
-    const response = await fetch(url);
-    const data = await response.json();
-    const imageUrl = await data.urls.regular;
-    return imageUrl;
-  };
 
   const getCurrentTime = () => {
     const newDate = new Date();
@@ -52,10 +44,7 @@ const Weather = (props) => {
 
   useEffect(() => {
     const getWeatherInfo = async (latitude, longitude) => {
-      const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=metric&appid=${KEY}`;
-
-      const response = await fetch(url);
-      const data = await response.json();
+      const data = await getInfo(latitude, longitude);
       const countryIndex = data.city.country;
 
       const currentInfo = {
@@ -88,7 +77,9 @@ const Weather = (props) => {
 
       const imageUrl = await getImageUrl(`${data.city.name}`);
 
-      setCurrentWeatherInfo({ currentInfo, forecast, imageUrl });
+      setImageUrl(imageUrl);
+      setCityName(data.city.name);
+      setCurrentWeatherInfo({ currentInfo, forecast });
     };
 
     getWeatherInfo(latitude, longitude);
@@ -141,6 +132,8 @@ function mapDispatchToProps(dispatch) {
     setCurrentWeatherInfo: (info) =>
       dispatch({ type: SET_CURRENT_WEATHER_INFO, info }),
     setCurrentTime: (time) => dispatch({ type: SET_CURRENT_TIME, time }),
+    setCityName: (city) => dispatch({ type: SET_CITY_NAME, city }),
+    setImageUrl: (url) => dispatch({ type: SET_IMAGE_URL, url }),
   };
 }
 

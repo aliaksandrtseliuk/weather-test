@@ -4,6 +4,8 @@ import {
   SET_CURRENT_COORS,
   SET_CURRENT_WEATHER_INFO,
   SET_CURRENT_TIME,
+  SET_CITY_NAME,
+  SET_IMAGE_URL,
 } from "../Actions/actionTypes";
 
 const initialState = {
@@ -31,9 +33,9 @@ const initialState = {
         temp: "",
       },
     },
-    imageUrl: "",
   },
   currentTime: "",
+  imageUrl: "",
 };
 
 const reducer = (state = initialState, action) => {
@@ -62,6 +64,16 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         currentTime: action.time,
+      };
+    case SET_CITY_NAME:
+      return {
+        ...state,
+        city: action.city,
+      };
+    case SET_IMAGE_URL:
+      return {
+        ...state,
+        imageUrl: action.url,
       };
     default:
       return {

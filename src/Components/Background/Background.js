@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "./Background.module.scss";
 
 import { connect } from "react-redux";
 
 const Background = (props) => {
   const { imageUrl } = props;
+
   return (
     <div
       className={classes.Background}
@@ -15,7 +16,7 @@ const Background = (props) => {
 
 function mapStateToProps(state) {
   return {
-    imageUrl: state.info.imageUrl,
+    imageUrl: state.imageUrl,
   };
 }
 

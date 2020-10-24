@@ -3,19 +3,37 @@ import classes from "./Coors.module.scss";
 import { connect } from "react-redux";
 import { getCurrentLocation } from "../../../../Helpers/getCurrentLocation";
 import { recalculateCoor } from "../../../../Helpers/recalculateCoor";
-import { SET_CURRENT_COORS } from "../../../../Actions/actionTypes";
+import {
+  START_LOADING,
+  SET_CURRENT_COORS,
+  STOP_LOADING,
+} from "../../../../Actions/actionTypes";
+import Loader from "../../../Loader/Loader";
 
 const Coors = (props) => {
-  const { setCurrentCoors, latitude, longitude } = props;
+  const {
+    setCurrentCoors,
+    latitude,
+    longitude,
+    loading,
+    startLoading,
+    stopLoading,
+  } = props;
 
   useEffect(() => {
     const getLocation = async () => {
+      startLoading();
       const coors = await getCurrentLocation();
       setCurrentCoors(coors);
+      stopLoading();
     };
 
     getLocation();
   }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div className={classes.Coors}>
@@ -27,15 +45,17 @@ const Coors = (props) => {
 
 function mapStateToProps(state) {
   return {
-    ...state,
     latitude: state.coors.lat,
     longitude: state.coors.lon,
+    loading: state.loading,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
+    startLoading: () => dispatch({ type: START_LOADING }),
     setCurrentCoors: (coors) => dispatch({ type: SET_CURRENT_COORS, coors }),
+    stopLoading: () => dispatch({ type: STOP_LOADING }),
   };
 }
 

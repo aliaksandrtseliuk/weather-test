@@ -1,0 +1,16 @@
+.Search {
+  width: 400px;
+  // display: grid;
+  // grid-template-columns: 2fr 1fr;
+  // grid-gap: 10px;
+  display: flex;
+  justify-content: space-between;
+
+  &__Item {
+    margin: 0;
+
+    &:first-child {
+      width: 320px;
+    }
+  }
+}
