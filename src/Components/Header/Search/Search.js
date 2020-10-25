@@ -27,7 +27,12 @@ const Search = (props) => {
   };
 
   const onFinish = (value) => {
+    setInputValue("");
     if (regexp.test(value.city)) return setError(true);
+
+    let cities = JSON.parse(localStorage.getItem("cities")) || [];
+    cities.unshift(value.city);
+    localStorage.setItem("cities", JSON.stringify(cities));
 
     getNewInfo(value.city);
   };
