@@ -38,14 +38,13 @@
   &__Icon {
     grid-column: 2/4;
     grid-row: 2/3;
-    background-size: 100% 100%;
+    background-size: contain;
+    background-position: center;
     background-repeat: no-repeat;
 
     @media (max-width: 600px) {
       grid-column: 3/5;
       height: 130px;
-      background-position: center;
-      background-size: contain;
     }
   }
 }

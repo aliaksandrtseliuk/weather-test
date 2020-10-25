@@ -25,7 +25,7 @@ const UpdateButton = (props) => {
 
   return (
     <Button type="primary" onClick={() => getNewBackground()}>
-      UB
+      Update BG
     </Button>
   );
 };
