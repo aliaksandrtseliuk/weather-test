@@ -5,7 +5,7 @@ import { getCurrentLocation } from "../../../../Helpers/getCurrentLocation";
 import { recalculateCoor } from "../../../../Helpers/recalculateCoor";
 import {
   START_LOADING,
-  SET_CURRENT_COORS,
+  SET_COORS,
   STOP_LOADING,
 } from "../../../../Actions/actionTypes";
 import Loader from "../../../Loader/Loader";
@@ -54,7 +54,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     startLoading: () => dispatch({ type: START_LOADING }),
-    setCurrentCoors: (coors) => dispatch({ type: SET_CURRENT_COORS, coors }),
+    setCurrentCoors: (coors) => dispatch({ type: SET_COORS, coors }),
     stopLoading: () => dispatch({ type: STOP_LOADING }),
   };
 }

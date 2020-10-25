@@ -1,7 +1,7 @@
 import {
   START_LOADING,
   STOP_LOADING,
-  SET_CURRENT_COORS,
+  SET_COORS,
   SET_CURRENT_WEATHER_INFO,
   SET_CURRENT_TIME,
   SET_CITY_NAME,
@@ -50,7 +50,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         loading: false,
       };
-    case SET_CURRENT_COORS:
+    case SET_COORS:
       return {
         ...state,
         coors: action.coors,

@@ -7,6 +7,7 @@ import {
   SET_CURRENT_TIME,
   SET_CITY_NAME,
   SET_IMAGE_URL,
+  STOP_LOADING,
 } from "../../../Actions/actionTypes";
 import { COUNTRIES as countries } from "../../../Helpers/countries";
 import { days, months } from "../../../Helpers/calendar";
@@ -25,6 +26,7 @@ const Weather = (props) => {
     setCurrentTime,
     setCityName,
     setImageUrl,
+    stopLoading,
   } = props;
 
   const getCurrentTime = () => {
@@ -80,6 +82,7 @@ const Weather = (props) => {
       setImageUrl(imageUrl);
       setCityName(data.city.name);
       setCurrentWeatherInfo({ currentInfo, forecast });
+      stopLoading();
     };
 
     getWeatherInfo(latitude, longitude);
@@ -134,6 +137,7 @@ function mapDispatchToProps(dispatch) {
     setCurrentTime: (time) => dispatch({ type: SET_CURRENT_TIME, time }),
     setCityName: (city) => dispatch({ type: SET_CITY_NAME, city }),
     setImageUrl: (url) => dispatch({ type: SET_IMAGE_URL, url }),
+    stopLoading: () => dispatch({ type: STOP_LOADING }),
   };
 }
 
