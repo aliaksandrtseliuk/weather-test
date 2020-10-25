@@ -1,0 +1,9 @@
+.App {
+  position: relative;
+  margin: 0 auto;
+  width: 1020px;
+
+  @media (max-width: 1019px) {
+    width: 100%;
+  }
+}

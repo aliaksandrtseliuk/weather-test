@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Arial", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+li {
+  list-style: none;
+}
